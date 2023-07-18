@@ -26,8 +26,10 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/checkout@v3
+      - name: checkout build configuration
+        uses: actions/checkout@v3
+      - name: checkout source repository
+        uses: actions/checkout@v3
         with:
           repository: ${{ inputs.repository }}
           ref: ${{ inputs.ref }}
