@@ -49,8 +49,6 @@ jobs:
         with:
           go-version: ${{ inputs.go_version }}
           cache-dependency-path: src/collector/go.sum
-      - run: go work sync
-        working-directory: src
       - name: build
         run: make package
         working-directory: src/collector
