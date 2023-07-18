@@ -1,0 +1,29 @@
+---
+
+name: Build OpenTelemetry Collector Lambda distribution
+on:
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: OpenTelemetry collector repository (OWNER/REPO)
+        type: string
+        default: aereal/opentelemetry-lambda
+      ref:
+        description: commit reference to be built
+        type: string
+        default: own-dist
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: ${{ inputs.repository }}
+          ref: ${{ inputs.ref }}
+      - uses: actions/setup-go@v4
+        with:
+          go-version-file: 'go.work'
+      - run: go work sync
+      - name: build
+        run: make package
+        working-directory: ./collector
