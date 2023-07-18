@@ -39,8 +39,8 @@ jobs:
       - run: |
           echo "# Build $repo" >> "$GITHUB_STEP_SUMMARY"
           echo >> "$GITHUB_STEP_SUMMARY"
-          echo "- ref: `$commit_ref`" >> "$GITHUB_STEP_SUMMARY"
-          echo "- commit hash: `$commit_hash`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- ref: \`$commit_ref\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "- commit hash: \`$commit_hash\`" >> "$GITHUB_STEP_SUMMARY"
         env:
           repo: ${{ inputs.repository }}
           commit_ref: ${{ inputs.ref }}
