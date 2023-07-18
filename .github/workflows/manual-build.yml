@@ -18,6 +18,9 @@ on:
         default: '1.20'
 jobs:
   build-go-lambda-image:
+    permissions:
+      contents: read
+      packages: write
     uses: ./.github/workflows/build-go-lambda-image.yml
     with:
       repository: ${{ inputs.repository }}
