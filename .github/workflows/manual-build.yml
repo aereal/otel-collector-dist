@@ -1,0 +1,25 @@
+---
+
+name: Invoke Lambda base image for Go with OpenTelemetry Collector extension build
+on:
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: OpenTelemetry collector repository (OWNER/REPO)
+        type: string
+        default: aereal/opentelemetry-lambda
+      ref:
+        description: commit reference to be built
+        type: string
+        default: support-datadog-exporter
+      go_version:
+        description: Go version to build
+        type: string
+        default: '1.20'
+jobs:
+  build-go-lambda-image:
+    uses: ./.github/workflows/build-go-lambda-image.yml
+    with:
+      repository: ${{ inputs.repository }}
+      ref: ${{ inputs.ref }}
+      go_version: ${{ inputs.go_version }}

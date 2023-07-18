@@ -1,17 +1,17 @@
 ---
 
-name: Build OpenTelemetry Collector Lambda distribution
+name: Build Lambda base image for Go with OpenTelemetry Collector extension
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       repository:
         description: OpenTelemetry collector repository (OWNER/REPO)
         type: string
-        default: aereal/opentelemetry-lambda
+        required: true
       ref:
         description: commit reference to be built
         type: string
-        default: own-dist
+        required: true
       go_version:
         description: Go version to build
         type: string
