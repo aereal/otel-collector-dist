@@ -68,7 +68,6 @@ jobs:
         run: |
           rm -rf ./lambda_runtime/go/build
           cp -R ./src/collector/build ./lambda_runtime/go/
-          tree ./lambda_runtime/go
       - uses: docker/build-push-action@v4
         with:
           context: ./lambda_runtime/go
