@@ -68,11 +68,12 @@ jobs:
         run: |
           root="./lambda_runtime/go"
           extensions_dir="$root/extensions"
-          config_dir="$root/collector-config"
           rm -rf "$extensions_dir" "$config_dir"
           cp -R ./src/collector/build/extensions "$root/"
-          mkdir -p "$config_dir"
-          cp ./src/collector/config.yaml "$config_dir/"
+      - name: Put own config
+        run: |
+          root="./lambda_runtime/go"
+          cp ./etc/otel-collector.yml "$root/"
       - uses: docker/build-push-action@v4
         with:
           context: ./lambda_runtime/go
