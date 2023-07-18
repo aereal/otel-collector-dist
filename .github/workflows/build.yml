@@ -20,9 +20,11 @@ jobs:
         with:
           repository: ${{ inputs.repository }}
           ref: ${{ inputs.ref }}
+          path: src
       - id: determine_hash
         run: |
           echo "commit_hash=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+        working-directory: ./src
       - run: |
           echo "# Build $repo" >> "$GITHUB_STEP_SUMMARY"
           echo >> "$GITHUB_STEP_SUMMARY"
@@ -34,9 +36,10 @@ jobs:
           commit_hash: ${{ steps.determine_hash.outputs.commit_hash }}
       - uses: actions/setup-go@v4
         with:
-          go-version-file: 'go.work'
-          cache-dependency-path: ./collector/go.sum
+          go-version-file: 'src/go.work'
+          cache-dependency-path: src/collector/go.sum
       - run: go work sync
+        working-directory: src
       - name: build
         run: make package
-        working-directory: ./collector
+        working-directory: src/collector
