@@ -35,6 +35,7 @@ jobs:
       - uses: actions/setup-go@v4
         with:
           go-version-file: 'go.work'
+          cache-dependency-path: ./collector/go.sum
       - run: go work sync
       - name: build
         run: make package
