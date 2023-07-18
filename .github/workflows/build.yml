@@ -12,6 +12,10 @@ on:
         description: commit reference to be built
         type: string
         default: own-dist
+      go_version:
+        description: Go version to build
+        type: string
+        required: true
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -43,7 +47,7 @@ jobs:
           commit_hash: ${{ steps.determine_hash.outputs.commit_hash }}
       - uses: actions/setup-go@v4
         with:
-          go-version-file: 'src/go.work'
+          go-version: ${{ inputs.go_version }}
           cache-dependency-path: src/collector/go.sum
       - run: go work sync
         working-directory: src
