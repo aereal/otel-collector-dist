@@ -64,6 +64,9 @@ jobs:
         with:
           images: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LAMBDA_GO }}
+          labels: |
+            org.opencontainers.image.revision=${{ steps.determine_hash.outputs.commit_hash }}
+            org.opencontainers.image.version=${{ inputs.ref }}
       - name: Copy distributions
         run: |
           root="./lambda_runtime/go"
